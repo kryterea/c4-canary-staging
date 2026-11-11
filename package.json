@@ -1,0 +1,12 @@
+{
+  "name": "beacon-order-intake",
+  "private": true,
+  "description": "Fictional Beacon order intake service. Test material for Kryterea assurance; not a real system.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.ts"
+  }
+}
