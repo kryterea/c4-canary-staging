@@ -1,4 +1,4 @@
-// STORY-007-v6 Record audit trail (traces to FR-007).
+// STORY-007-v6 / STORY-007 Record audit trail (traces to FR-007).
 import type { Step } from './types.ts'
 
 export interface AuditEvent {

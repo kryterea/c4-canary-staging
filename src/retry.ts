@@ -1,4 +1,4 @@
-// STORY-006-v6 Retry failed finance import, Coordinator requested (traces to FR-006).
+// STORY-006-v6 / STORY-006 Retry failed finance import, Coordinator requested (traces to FR-006).
 import type { AuditLog } from './audit.ts'
 import type { EnqueueResult, FinanceGateway } from './finance.ts'
 import type { Actor, Clock, OrderRecord } from './types.ts'

@@ -4,8 +4,8 @@ import { DuplicateRegistry, stableOrderKey } from '../src/duplicates.ts'
 import { submitOrder } from '../src/intake.ts'
 import { completeOrder, coordinator, deps, fakeFinance, fixedClock } from './helpers.ts'
 
-describe('STORY-002-v6 / FR-002 duplicate submissions and idempotency key', () => {
-  it('STORY-002-v6: flags a suspected duplicate before finance enqueue with the stable key shown', async () => {
+describe('STORY-002-v6 / STORY-002 / FR-002 duplicate submissions and idempotency key', () => {
+  it('STORY-002-v6 / STORY-002: flags a suspected duplicate before finance enqueue with the stable key shown', async () => {
     const finance = fakeFinance()
     const d = deps(finance)
     await submitOrder(completeOrder(), coordinator, d)
@@ -15,14 +15,14 @@ describe('STORY-002-v6 / FR-002 duplicate submissions and idempotency key', () =
     assert.equal(finance.calls.length, 1)
   })
 
-  it('STORY-002-v6: keeps the same stable key when the same order is submitted again', () => {
+  it('STORY-002-v6 / STORY-002: keeps the same stable key when the same order is submitted again', () => {
     const registry = new DuplicateRegistry(fixedClock)
     const first = registry.check(completeOrder())
     const again = registry.check(completeOrder())
     assert.equal(again.key, first.key)
   })
 
-  it('STORY-002-v6: keeps the flag, key and reason visible with a follow-up until cleared', () => {
+  it('STORY-002-v6 / STORY-002: keeps the flag, key and reason visible with a follow-up until cleared', () => {
     const registry = new DuplicateRegistry(fixedClock)
     registry.check(completeOrder())
     const flagged = registry.check(completeOrder())

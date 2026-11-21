@@ -1,4 +1,4 @@
-// STORY-001-v6 Validate required fields (traces to FR-001).
+// STORY-001-v6 / STORY-001 Validate required fields (traces to FR-001).
 import type { Order } from './types.ts'
 
 export const REQUIRED_FIELDS = ['customerId', 'poNumber', 'deliveryDate', 'lines'] as const

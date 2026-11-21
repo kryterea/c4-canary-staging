@@ -1,4 +1,4 @@
-// STORY-003-v6 Idempotent finance API enqueue (traces to FR-003).
+// STORY-003-v6 / STORY-003 Idempotent finance API enqueue (traces to FR-003).
 import type { Clock } from './types.ts'
 
 export interface FinanceApi {

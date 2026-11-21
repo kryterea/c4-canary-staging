@@ -1,4 +1,4 @@
-// STORY-002-v6 Identify duplicate submissions and idempotency key (traces to FR-002).
+// STORY-002-v6 / STORY-002 Identify duplicate submissions and idempotency key (traces to FR-002).
 import { createHash } from 'node:crypto'
 import type { Clock, Order } from './types.ts'
 

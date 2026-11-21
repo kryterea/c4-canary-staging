@@ -4,8 +4,8 @@ import { submitOrder } from '../src/intake.ts'
 import { validateOrder } from '../src/validation.ts'
 import { completeOrder, coordinator, deps, fakeFinance } from './helpers.ts'
 
-describe('STORY-001-v6 / FR-001 validate required fields', () => {
-  it('STORY-001-v6: blocks an order with missing fields before finance enqueue and lists them', async () => {
+describe('STORY-001-v6 / STORY-001 / FR-001 validate required fields', () => {
+  it('STORY-001-v6 / STORY-001: blocks an order with missing fields before finance enqueue and lists them', async () => {
     const finance = fakeFinance()
     const outcome = await submitOrder(
       completeOrder({ poNumber: '', lines: [] }),
@@ -17,12 +17,12 @@ describe('STORY-001-v6 / FR-001 validate required fields', () => {
     assert.equal(finance.calls.length, 0)
   })
 
-  it('STORY-001-v6: lets a complete order proceed to the next intake step', async () => {
+  it('STORY-001-v6 / STORY-001: lets a complete order proceed to the next intake step', async () => {
     const outcome = await submitOrder(completeOrder(), coordinator, deps())
     assert.equal(outcome.stage, 'sent')
   })
 
-  it('STORY-001-v6: keeps a resubmitted incomplete order blocked, with the reason shown', async () => {
+  it('STORY-001-v6 / STORY-001: keeps a resubmitted incomplete order blocked, with the reason shown', async () => {
     const finance = fakeFinance()
     const d = deps(finance)
     await submitOrder(completeOrder({ deliveryDate: undefined }), coordinator, d)
@@ -32,7 +32,7 @@ describe('STORY-001-v6 / FR-001 validate required fields', () => {
     assert.equal(finance.calls.length, 0)
   })
 
-  it('STORY-001-v6: stays blocked when validation cannot complete', () => {
+  it('STORY-001-v6 / STORY-001: stays blocked when validation cannot complete', () => {
     const result = validateOrder(null)
     assert.equal(result.ok, false)
     assert.equal(!result.ok && result.reason, 'validation_could_not_complete')

@@ -1,4 +1,4 @@
-// STORY-005-v6 View authorized order status (traces to FR-005).
+// STORY-005-v6 / STORY-005 View authorized order status (traces to FR-005).
 import type { Actor, OrderRecord, StateEvent } from './types.ts'
 
 export interface StatusView {

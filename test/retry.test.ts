@@ -25,8 +25,8 @@ async function failedGateway() {
   return { finance, gateway }
 }
 
-describe('STORY-006-v6 / FR-006 coordinator retry of a failed finance import', () => {
-  it('STORY-006-v6: reuses the original key when a coordinator retries a failed import', async () => {
+describe('STORY-006-v6 / STORY-006 / FR-006 coordinator retry of a failed finance import', () => {
+  it('STORY-006-v6 / STORY-006: reuses the original key when a coordinator retries a failed import', async () => {
     const { finance, gateway } = await failedGateway()
     const outcome = await requestRetry(
       failedRecord(),
@@ -42,7 +42,7 @@ describe('STORY-006-v6 / FR-006 coordinator retry of a failed finance import', (
     )
   })
 
-  it('STORY-006-v6: disables retry while the import is pending or unknown', async () => {
+  it('STORY-006-v6 / STORY-006: disables retry while the import is pending or unknown', async () => {
     const { finance, gateway } = await failedGateway()
     for (const status of ['pending', 'unknown'] as const) {
       const outcome = await requestRetry(
@@ -58,7 +58,7 @@ describe('STORY-006-v6 / FR-006 coordinator retry of a failed finance import', (
     assert.equal(finance.calls.length, 1)
   })
 
-  it('STORY-006-v6: never marks the order accepted on a retry request alone', async () => {
+  it('STORY-006-v6 / STORY-006: never marks the order accepted on a retry request alone', async () => {
     const { gateway } = await failedGateway()
     const outcome = await requestRetry(
       failedRecord(),
@@ -70,7 +70,7 @@ describe('STORY-006-v6 / FR-006 coordinator retry of a failed finance import', (
     assert.notEqual(outcome.allowed && outcome.record.importStatus, 'accepted')
   })
 
-  it('STORY-006-v6: keeps a failed result visible with reason, key and time', async () => {
+  it('STORY-006-v6 / STORY-006: keeps a failed result visible with reason, key and time', async () => {
     const { gateway } = await failedGateway()
     const kept = gateway.result('ord_stable')
     assert.equal(kept?.status, 'failed')
@@ -79,7 +79,7 @@ describe('STORY-006-v6 / FR-006 coordinator retry of a failed finance import', (
     assert.equal(kept?.at, '2026-11-11T09:00:00.000Z')
   })
 
-  it('STORY-006-v6: denies and audits a retry by support, with no finance call', async () => {
+  it('STORY-006-v6 / STORY-006: denies and audits a retry by support, with no finance call', async () => {
     const { finance, gateway } = await failedGateway()
     const audit = new AuditLog()
     const outcome = await requestRetry(failedRecord(), support, gateway, audit, fixedClock)

@@ -17,8 +17,8 @@ const record: OrderRecord = {
   ],
 }
 
-describe('STORY-005-v6 / FR-005 view order status', () => {
-  it('STORY-005-v6: shows a coordinator or support the full state history', () => {
+describe('STORY-005-v6 / STORY-005 / FR-005 view order status', () => {
+  it('STORY-005-v6 / STORY-005: shows a coordinator or support the full state history', () => {
     for (const actor of [coordinator, support]) {
       const view = viewStatus(record, actor)
       assert.deepEqual(
@@ -28,7 +28,7 @@ describe('STORY-005-v6 / FR-005 view order status', () => {
     }
   })
 
-  it('STORY-005-v6: shows pending or unknown status with guidance to check or escalate', () => {
+  it('STORY-005-v6 / STORY-005: shows pending or unknown status with guidance to check or escalate', () => {
     assert.match(viewStatus(record, coordinator).guidance ?? '', /escalate/)
     const unknown = viewStatus({ ...record, importStatus: 'unknown' }, support)
     assert.match(unknown.guidance ?? '', /escalate/)
